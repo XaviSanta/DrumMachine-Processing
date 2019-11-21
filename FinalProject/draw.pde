@@ -25,3 +25,8 @@ void drawMeshStepButtons() {
     }
   }
 }
+
+void drawMetronome() {
+  xMetronome = calculateMetronomeXPosition();
+  rect(xMetronome,y,size,size,15,15,15,15);
+}

@@ -6,11 +6,12 @@ FilePlayer filePlayer;
 ArrayList<AudioPlayer> audioList = new ArrayList<AudioPlayer>();
 
 int time;
-float x; 
+float xMetronome; 
 int initX=153;
 int y = 383 + 7 * 45;
-float speed = 1;
-
+int bpm = 80;
+int iMetronome;
+int lastIMetronome = -1;
 
 void setupAudio() {
   minim = new Minim(this);
@@ -36,11 +37,24 @@ void setupAudio() {
   audioList.add(minim.loadFile("bongo7.wav"));
 }
 
-void drawMetronome() {
-  x = calculateMetronomeXPosition();
-  rect(x,y, size,size,15,15,15,15);
+
+
+int calculateMetronomeXPosition() {
+  iMetronome = ((millis() - time)/(bpm*2)) % 16;
+  
+  if(iMetronome != lastIMetronome) {
+    playNotes();
+    //println(iMetronome);
+  }
+  lastIMetronome = iMetronome;
+  return initX + (iMetronome) * 45; 
 }
 
-float calculateMetronomeXPosition() {
- return initX + (((millis() - time)/500) % 16) * 45; 
+void playNotes() {
+  for(int i = 0; i < 7; i++) {
+    StepButton sb = sBList.get(i*16+iMetronome);
+    if(sb.isClicked && i == 0) {
+      sb.playSound();
+    }
+  }
 }

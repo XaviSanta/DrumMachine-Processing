@@ -63,9 +63,13 @@ class StepButton {
       isClicked = false;
     }else{
        isClicked = true;
-       audioList.get(col).rewind();
-       audioList.get(col).play();
+       playSound();
     }
+  }
+  
+  void playSound() {
+    audioList.get(col).rewind();
+    audioList.get(col).play();
   }
   
   void drawSquare() {
