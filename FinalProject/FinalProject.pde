@@ -11,6 +11,8 @@ void setup() {
   
   setupAudio();  
   
+  time = millis();
+  
   setupStepButtons();
 }
 

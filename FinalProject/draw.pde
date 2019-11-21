@@ -2,9 +2,11 @@ void draw() {
   background(0);
   drawTable();
   drawMeshStepButtons();
+  
+  drawMetronome();
 }
 
-public void drawTable() {
+void drawTable() {
   //rotateX(0.1);
   stroke(0);
   fill(tableColor);
@@ -12,7 +14,7 @@ public void drawTable() {
   rect(0, 0, width, height, 35, 35, 35, 35);
 }
 
-public void drawMeshStepButtons() {
+void drawMeshStepButtons() {
   strokeWeight(2);
   stroke(0);
   
