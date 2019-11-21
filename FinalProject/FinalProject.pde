@@ -6,7 +6,6 @@ import java.util.*;
 Minim minim;
 ControlP5 cp5;
 
-ArrayList<StepButton> sBList = new ArrayList<StepButton>();
 
 void setup() {
   size(1024, 768, P3D);
@@ -22,5 +21,12 @@ void createButtons() {
       sBList.add(sB);
       counter++;
     }
+  }
+}
+
+void mouseClicked() {  
+  if (isInStepButtonRange(mouseX, mouseY)) {
+    getStepButton(mouseX, mouseY).activate();
+    
   }
 }
