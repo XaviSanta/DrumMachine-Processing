@@ -1,6 +1,17 @@
 int size = 45;
 ArrayList<StepButton> sBList = new ArrayList<StepButton>();
 
+void setupStepButtons() {
+  int counter = 0;
+  for (int i = 0; i < 4*4; i++) {
+    for (int j = 0; j < 7; j++) {
+      StepButton sB = new StepButton(i, j, counter);
+      sBList.add(sB);
+      counter++;
+    }
+  }
+}
+
 boolean isInStepButtonRange(int x, int y) {
   if (x < 152 || x > 152 + 4 * 4 * size || 
       y < 382 || y > 382 + 7 *     size) {
@@ -48,7 +59,13 @@ class StepButton {
   }
 
   void activate() {
-    isClicked = !isClicked;
+    if(isClicked){
+      isClicked = false;
+    }else{
+       isClicked = true;
+       audioList.get(col).rewind();
+       audioList.get(col).play();
+    }
   }
   
   void drawSquare() {
@@ -65,6 +82,7 @@ class StepButton {
       
       translate(-width*.15 -row*size, -height*.5 -col*size);
   }
+  
   void drawNumber() {
     if(col == 0 && (row % 4) == 0) {
       translate(size/2 - 3, -size*0.1);
