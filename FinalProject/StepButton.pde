@@ -68,8 +68,7 @@ class StepButton {
   }
 
   void playSound() {
-    audioList.get(col).rewind();
-    audioList.get(col).play();
+    sound[col].trigger();
   }
 
   void drawSquare() {
