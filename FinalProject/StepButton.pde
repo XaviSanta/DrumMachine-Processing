@@ -3,7 +3,7 @@ ArrayList<StepButton> sBList = new ArrayList<StepButton>();
 
 void setupStepButtons() {
   int counter = 0;
-  for (int i = 0; i < 4*4; i++) {
+  for (int i = 0; i < 16; i++) {
     for (int j = 0; j < 7; j++) {
       StepButton sB = new StepButton(i, j, counter);
       sBList.add(sB);
@@ -13,8 +13,8 @@ void setupStepButtons() {
 }
 
 boolean isInStepButtonRange(int x, int y) {
-  if (x < 152 || x > 152 + 4 * 4 * size || 
-      y < 382 || y > 382 + 7 *     size) {
+  if (x < 152 || x > 152 + 16 * size || 
+      y < 382 || y > 382 + 7 *  size) {
     return false;
   } else {
     return true;
@@ -73,11 +73,7 @@ class StepButton {
   }
   
   void drawSquare() {
-      if(this.isClicked){
-        fill(buttonStepColorOn);
-      } else {
-        fill(buttonStepColorOff);
-      }
+      setButtonColor();
       
       translate(width*.15 + row*size, height*.5 + col*size);
       
@@ -85,6 +81,14 @@ class StepButton {
       drawNumber();
       
       translate(-width*.15 -row*size, -height*.5 -col*size);
+  }
+  
+  void setButtonColor() {
+    if(this.isClicked){
+        fill(buttonStepColorOn);
+      } else {
+        fill(buttonStepColorOff);
+      }
   }
   
   void drawNumber() {

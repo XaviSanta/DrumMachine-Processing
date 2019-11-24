@@ -44,17 +44,18 @@ int calculateMetronomeXPosition() {
   
   if(iMetronome != lastIMetronome) {
     playNotes();
-    //println(iMetronome);
   }
   lastIMetronome = iMetronome;
   return initX + (iMetronome) * 45; 
 }
 
 void playNotes() {
-  for(int i = 0; i < 7; i++) {
-    StepButton sb = sBList.get(i*16+iMetronome);
-    if(sb.isClicked && i == 0) {
-      sb.playSound();
+  for(int i = 0; i < 16; i++) {
+    for(int j = 0; j < 7; j++) {
+      StepButton sb = sBList.get(j+iMetronome*7);
+      if(sb.isClicked && i == 0) {
+        sb.playSound();
+      }
     }
   }
 }

@@ -21,6 +21,5 @@ void setup() {
 void mouseClicked() {  
   if (isInStepButtonRange(mouseX, mouseY)) {
     getStepButton(mouseX, mouseY).activate();
-    
   }
 }
