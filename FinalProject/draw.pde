@@ -2,7 +2,7 @@ void draw() {
   background(0);
   drawTable();
   drawMeshStepButtons();
-
+  drawSynth();
   if (playToggle) drawMetronome();
 }
 
@@ -26,6 +26,9 @@ void drawMeshStepButtons() {
   }
 }
 
+void drawSynth() {
+  
+}
 void drawMetronome() {
   xMetronome = calculateMetronomeXPosition();
   rect(xMetronome, y, size, size, 15, 15, 15, 15);

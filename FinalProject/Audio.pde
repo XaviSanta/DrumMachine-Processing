@@ -1,5 +1,6 @@
 import ddf.minim.*;
 import ddf.minim.ugens.*;
+
 Minim      minim;
 FilePlayer filePlayer;
 

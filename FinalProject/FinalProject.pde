@@ -11,9 +11,6 @@ void setup() {
   cp5 = new ControlP5(this);
   
   setupAudio();  
-
-  time = millis();
-
   setupSliders();
   setupPlayPauseToggle();
   setupStepButtons();
@@ -28,10 +25,9 @@ void mouseClicked() {
 }
 
 void setupSliders() {
-  
   cp5.addSlider("MasterVolume")
     .setPosition(30, 50)
-    .setSize(80, 10)
+    .setSize(100, 20)
     .setRange(-24, 24)
     .setValue(0);
   
