@@ -20,13 +20,13 @@ void setupAudio() {
   out = minim.getLineOut();
   
   for(int i = 0; i < 7; i++) {
-    sound[i] = new Sampler("sound" + str(i+1) + ".wav", 7, minim);
+    sound[i] = new Sampler("House" + str(i+1) + ".wav", 7, minim);
     sound[i].patch(out);
   }
 }
 
 int calculateMetronomeXPosition() {
-  iMetronome = ((millis() - time)/(bpm*2)) % 16;
+  iMetronome = ((millis() - time)/(120)) % 16;
   
   if(iMetronome != lastIMetronome) {
     playNotes();
