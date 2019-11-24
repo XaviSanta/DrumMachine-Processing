@@ -2,8 +2,8 @@ void draw() {
   background(0);
   drawTable();
   drawMeshStepButtons();
-  
-  drawMetronome();
+
+  if (playToggle) drawMetronome();
 }
 
 void drawTable() {
@@ -17,7 +17,7 @@ void drawTable() {
 void drawMeshStepButtons() {
   strokeWeight(2);
   stroke(0);
-  
+
   for (int i = 0; i < 4*4; i++) {
     for (int j = 0; j < 7; j++) {
       StepButton sb = sBList.get(i*7 + j);
@@ -28,5 +28,5 @@ void drawMeshStepButtons() {
 
 void drawMetronome() {
   xMetronome = calculateMetronomeXPosition();
-  rect(xMetronome,y,size,size,15,15,15,15);
+  rect(xMetronome, y, size, size, 15, 15, 15, 15);
 }

@@ -12,6 +12,7 @@ int y = 383 + 7 * 45;
 int bpm = 80;
 int iMetronome;
 int lastIMetronome = -1;
+boolean playToggle = false;
 
 void setupAudio() {
   minim = new Minim(this);
