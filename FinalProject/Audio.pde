@@ -20,21 +20,9 @@ void setupAudio() {
   audioList.add(minim.loadFile("bongo7.wav"));
   audioList.add(minim.loadFile("bongo1.wav"));
   audioList.add(minim.loadFile("bongo7.wav"));
-  
   audioList.add(minim.loadFile("bongo1.wav"));
   audioList.add(minim.loadFile("bongo7.wav"));
   audioList.add(minim.loadFile("bongo1.wav"));
-  audioList.add(minim.loadFile("bongo7.wav"));
-  
-  audioList.add(minim.loadFile("bongo1.wav"));
-  audioList.add(minim.loadFile("bongo7.wav"));
-  audioList.add(minim.loadFile("bongo1.wav"));
-  audioList.add(minim.loadFile("bongo7.wav"));
-  
-  audioList.add(minim.loadFile("bongo1.wav"));
-  audioList.add(minim.loadFile("bongo7.wav"));
-  audioList.add(minim.loadFile("bongo1.wav"));
-  audioList.add(minim.loadFile("bongo7.wav"));
 }
 
 
@@ -58,4 +46,40 @@ void playNotes() {
       }
     }
   }
+}
+
+void MasterVolume(int theMVol) {
+  for(int i = 0; i < audioList.size(); i++){
+    AudioPlayer p = audioList.get(i);
+    p.setGain(theMVol);
+  }
+}
+
+void Volume1(int theRowVol) {
+  AudioPlayer p = audioList.get(0);
+  p.setGain(theRowVol);
+}
+void Volume2(int theRowVol) {
+  AudioPlayer p = audioList.get(1);
+  p.setGain(theRowVol);
+}
+void Volume3(int theRowVol) {
+  AudioPlayer p = audioList.get(2);
+  p.setGain(theRowVol);
+}
+void Volume4(int theRowVol) {
+  AudioPlayer p = audioList.get(3);
+  p.setGain(theRowVol);
+}
+void Volume5(int theRowVol) {
+  AudioPlayer p = audioList.get(4);
+  p.setGain(theRowVol);
+}
+void Volume6(int theRowVol) {
+  AudioPlayer p = audioList.get(5);
+  p.setGain(theRowVol);
+}
+void Volume7(int theRowVol) {
+  AudioPlayer p = audioList.get(6);
+  p.setGain(theRowVol);
 }
