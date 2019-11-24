@@ -14,7 +14,7 @@ void setupStepButtons() {
 
 boolean isInStepButtonRange(int x, int y) {
   if (x < 152 || x > 152 + 16 * size || 
-      y < 382 || y > 382 + 7 *  size) {
+    y < 382 || y > 382 + 7 *  size) {
     return false;
   } else {
     return true;
@@ -59,51 +59,51 @@ class StepButton {
   }
 
   void activate() {
-    if(isClicked){
+    if (isClicked) {
       isClicked = false;
-    }else{
-       isClicked = true;
-       playSound();
+    } else {
+      isClicked = true;
+      playSound();
     }
   }
-  
+
   void playSound() {
     audioList.get(col).rewind();
     audioList.get(col).play();
   }
-  
+
   void drawSquare() {
-      setButtonColor();
-      
-      translate(width*.15 + row*size, height*.5 + col*size);
-      
-      rect(0, 0, size, size, 15, 15, 15, 15);
-      drawNumber();
-      
-      translate(-width*.15 -row*size, -height*.5 -col*size);
+    setButtonColor();
+
+    translate(width*.15 + row*size, height*.5 + col*size);
+
+    rect(0, 0, size, size, 15, 15, 15, 15);
+    drawNumber();
+
+    translate(-width*.15 -row*size, -height*.5 -col*size);
   }
-  
+
   void setButtonColor() {
-    if(this.isClicked){
-        fill(buttonStepColorOn);
-      } else {
-        fill(buttonStepColorOff);
-      }
+    if (this.isClicked) {
+      fill(buttonStepColorOn);
+    } else {
+      fill(buttonStepColorOff);
+    }
   }
-  
+
   void drawNumber() {
-    if(col == 0 && (row % 4) == 0) {
+    if (col == 0 && (row % 4) == 0) {
       translate(size/2 - 3, -size*0.1);
       fill(buttonStepColorOn);
       textSize(15);
-      text(4*row/16+1,0,0); //To write 1, 2, 3, 4
+      text(4*row/16+1, 0, 0); //To write 1, 2, 3, 4
       translate(-size/2 + 3, size*0.1);
     }
-    if(col == 6) {
+    if (col == 6) {
       translate(size/2 - 5, size*1.5);
       fill(buttonStepColorOn);
       textSize(15);
-      text(row + 1,0,0);
+      text(row + 1, 0, 0);
       translate(-size/2 + 5, -size*1.5);
     }
   }

@@ -4,9 +4,6 @@ void draw() {
   drawMeshStepButtons();
   
   drawMetronome();
-  
-  fill(100);
-  rect(0,0,100,100);
 }
 
 void drawTable() {

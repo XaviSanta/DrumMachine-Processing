@@ -1,6 +1,6 @@
 import ddf.minim.*;
 import ddf.minim.ugens.*;
-Minim minim;
+Minim      minim;
 FilePlayer filePlayer;
 
 ArrayList<AudioPlayer> audioList = new ArrayList<AudioPlayer>();
