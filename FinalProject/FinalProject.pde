@@ -4,16 +4,20 @@ import java.util.*;
 
 ControlP5 cp5;
 String fileName;
-
+ScrollableList scrollableList;
 
 void setup() {
   size(1024, 768);
   cp5 = new ControlP5(this);
 
   setupAudio();  
+  
   setupSliders();
+  setupDropDown();
+  
   setupPlayPauseToggle();
   setupClearButton();
+  
   setupStepButtons();
 }
 
@@ -42,6 +46,23 @@ void setupSliders() {
   }
 }
 
+void setupDropDown() {
+  scrollableList = cp5.addScrollableList("Playlist")
+    .setPosition(30, 80)
+    .setBackgroundColor(buttonStepColorOn)
+    .setItemHeight(15)
+    .setBarHeight(15)
+    .setColorBackground(buttonStepColorOff)
+    .setColorActive(buttonStepColorOn)
+    .setColorForeground(tableColor);
+  
+  for(int i = 0; i < playlistName.length; i++) {
+    scrollableList.addItem(playlistName[i], i);
+  }
+}
+
+
+
 void setupPlayPauseToggle() {
   cp5.addToggle("PlayPause")
     .setPosition(width*.9, 50)
@@ -54,6 +75,7 @@ void PlayPause(boolean theFlag) {
   time = millis(); //To start from the initial column
 }
 
+
 void setupClearButton() {
   cp5.addButton("Clear")
     .setPosition(width*.85, 50)
@@ -61,7 +83,7 @@ void setupClearButton() {
 }
 
 void Clear() {
-  for(int i = 0; i < sBList.size(); i++) {
+  for (int i = 0; i < sBList.size(); i++) {
     sBList.get(i).isClicked = false;
   }
 }

@@ -4,6 +4,8 @@ import ddf.minim.ugens.*;
 Minim      minim;
 //FilePlayer filePlayer;
 Sampler [] sound = new Sampler[7];
+String [] playlistName = new String[3];
+int iPlaylist=0;
 AudioOutput out;
 
 int time;
@@ -19,12 +21,21 @@ void setupAudio() {
   minim = new Minim(this);
   out = minim.getLineOut();
   
-  for(int i = 0; i < 7; i++) {
-    sound[i] = new Sampler("House" + str(i+1) + ".wav", 7, minim);
-    sound[i].patch(out);
-  }
+  playlistName[0] = "House";
+  playlistName[1] = "Rock";
+  playlistName[2] = "Custom";
+  
+  setPlaylist(0);
 }
-
+void Playlist(int n){
+    setPlaylist(n);
+}
+void setPlaylist(int n) {
+ for(int i = 0; i < 7; i++) {
+    sound[i] = new Sampler(playlistName[n] + str(i+1) + ".wav", 7, minim);
+    sound[i].patch(out);
+  } 
+}
 int calculateMetronomeXPosition() {
   iMetronome = ((millis() - time)/(120)) % 16;
   

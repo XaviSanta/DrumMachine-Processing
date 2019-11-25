@@ -33,10 +33,11 @@ void drawSynth() {
     float x2  =  map( i+1, 0, out.bufferSize(), 0, width );
     // draw a line from one buffer position to the next for both channels
     line( x1, 50 - out.left.get(i)*50, x2, 50 - out.left.get(i+1)*50);
-    line( x1, 150 - out.right.get(i)*50, x2, 150 - out.right.get(i+1)*50);
+    //line( x1, 150 - out.right.get(i)*50, x2, 150 - out.right.get(i+1)*50);
   }  
   translate(0,-100);
 }
+
 void drawMetronome() {
   xMetronome = calculateMetronomeXPosition();
   rect(xMetronome, y, size, size, 15, 15, 15, 15);
