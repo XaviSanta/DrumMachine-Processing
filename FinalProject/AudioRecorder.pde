@@ -7,23 +7,102 @@ void setupMicrphone() {
   in = minim.getLineIn();  
 }
 
-void setupRecorder(){
-  numCustom = numCustom % 7 + 1;
-  recorder = minim.createRecorder(in,"/data/Custom"+numCustom+".wav");
+void setupRecorder(int n){
+  recorder = minim.createRecorder(in,"/data/Custom"+n+".wav");
 }
 
-void RecordSound() {
+void startRecording() {
+  recorder.beginRecord();
+  recorderTimer=0; 
+  println("BeginRecording 7.");
+}
+void saveRecord() {
+  recorder.save();
+  recorder.endRecord();
+  println("Done saveing.");
+  setPlaylist(2);
+}
+
+void Record1() {
   if ( recorder.isRecording() ) 
     {
-      recorder.endRecord();
-      recorder.save();
-      println("Done saving.");
+      saveRecord();
     }
     else 
     {
-      setupRecorder();
-      recorder.beginRecord();
-      recorderTimer=0;
-      println("BeginRecording.");
+      setupRecorder(1);
+      startRecording();
+    }
+}
+
+void Record2() {
+  if ( recorder.isRecording() ) 
+    {
+      saveRecord();
+    }
+    else 
+    {
+      setupRecorder(2);
+      startRecording();
+    }
+}
+
+void Record3() {
+  if ( recorder.isRecording() ) 
+    {
+      saveRecord();
+    }
+    else 
+    {
+      setupRecorder(3);
+      startRecording();
+    }
+}
+
+void Record4() {
+  if ( recorder.isRecording() ) 
+    {
+      saveRecord();
+    }
+    else 
+    {
+      setupRecorder(4);
+      startRecording();
+    }
+}
+
+void Record5() {
+  if ( recorder.isRecording() ) 
+    {
+      saveRecord();
+    }
+    else 
+    {
+      setupRecorder(5);
+      startRecording();
+    }
+}
+
+void Record6() {
+  if ( recorder.isRecording() ) 
+    {
+      saveRecord();
+    }
+    else 
+    {
+      setupRecorder(6);
+      startRecording();
+    }
+}
+
+void Record7() {
+  if ( recorder.isRecording() ) 
+    {
+      saveRecord();
+    }
+    else 
+    {
+      setupRecorder(7);
+      startRecording();
     }
 }

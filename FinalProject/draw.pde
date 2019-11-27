@@ -7,9 +7,8 @@ void draw() {
   if(recorder.isRecording()){
     recorderTimer++;
     if(recorderTimer > 30){
-      recorder.save();
-      recorder.endRecord();
-      println("Done saveing.");
+      
+      saveRecord();
     }
     
   }

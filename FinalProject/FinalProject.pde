@@ -15,8 +15,8 @@ void setup() {
   setupMicrphone();
   
   setupRecorderButton();
-  //setupRecorder();
-  recorder = minim.createRecorder(in,"/data/Custom1"+numCustom+".wav");
+  setupRecorder(0);
+  
   setupSliders();
   setupDropDown();
 
@@ -35,13 +35,16 @@ void mouseClicked() {
 }
 
 void setupRecorderButton() {
-  
-  cp5.addButton("RecordSound")
-    .setPosition(30, 250)
-    .setSize(100, 100)
-    .setColorBackground(buttonStepColorOff)
-    .setColorForeground(secondaryColor)
-    .setColorActive(buttonStepColorOn);
+
+  for (int i = 0; i < 7; i++) {
+    String volRow = "Record" + Integer.toString(1+i);
+    cp5.addButton(volRow)
+      .setPosition(30, size*i + height*.5)
+      .setSize(size, size)
+      .setColorBackground(buttonStepColorOff)
+      .setColorForeground(secondaryColor)
+      .setColorActive(buttonStepColorOn);
+  }
 }
 
 void setupSliders() {
