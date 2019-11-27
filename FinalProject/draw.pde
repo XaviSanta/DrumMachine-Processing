@@ -4,6 +4,15 @@ void draw() {
   drawMeshStepButtons();
   drawSynth();
   if (playToggle) drawMetronome();
+  if(recorder.isRecording()){
+    recorderTimer++;
+    if(recorderTimer > 30){
+      recorder.save();
+      recorder.endRecord();
+      println("Done saveing.");
+    }
+    
+  }
 }
 
 void drawTable() {
@@ -15,12 +24,8 @@ void drawTable() {
 void drawMeshStepButtons() {
   strokeWeight(2);
   stroke(0);
-
-  for (int i = 0; i < 4*4; i++) {
-    for (int j = 0; j < 7; j++) {
-      StepButton sb = sBList.get(i*7 + j);
-      sb.drawSquare();
-    }
+  for(int i = 0; i < sBList.size(); i++){
+    sBList.get(i).drawSquare();
   }
 }
 

@@ -27,21 +27,25 @@ void setupAudio() {
   
   setPlaylist(0);
 }
+
 void Playlist(int n){
     setPlaylist(n);
 }
+
 void setPlaylist(int n) {
  for(int i = 0; i < 7; i++) {
     sound[i] = new Sampler(playlistName[n] + str(i+1) + ".wav", 7, minim);
     sound[i].patch(out);
   } 
 }
+
 int calculateMetronomeXPosition() {
-  iMetronome = ((millis() - time)/(120)) % 16;
+  iMetronome = ((millis()-time)/120) % 16; //Number between 0 and 15, it changes in every beat
   
   if(iMetronome != lastIMetronome) {
     playNotes();
   }
+  
   lastIMetronome = iMetronome;
   return initX + (iMetronome) * 45; 
 }
@@ -62,7 +66,7 @@ void MasterVolume(int theMVol) {
 }
 
 //void Volume1(int theRowVol) {
-//  sound[0].amplitude = UGenInput(UGen. , theRowVol);
+//  sound[0].amplitude.;
 //}
 //void Volume2(int theRowVol) {
 //  AudioSample p = audioList.get(1);

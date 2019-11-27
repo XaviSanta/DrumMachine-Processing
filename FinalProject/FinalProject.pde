@@ -11,13 +11,18 @@ void setup() {
   cp5 = new ControlP5(this);
 
   setupAudio();  
+
+  setupMicrphone();
   
+  setupRecorderButton();
+  //setupRecorder();
+  recorder = minim.createRecorder(in,"/data/Custom1"+numCustom+".wav");
   setupSliders();
   setupDropDown();
-  
+
   setupPlayPauseToggle();
   setupClearButton();
-  
+
   setupStepButtons();
 }
 
@@ -29,12 +34,25 @@ void mouseClicked() {
   }
 }
 
+void setupRecorderButton() {
+  
+  cp5.addButton("RecordSound")
+    .setPosition(30, 250)
+    .setSize(100, 100)
+    .setColorBackground(buttonStepColorOff)
+    .setColorForeground(secondaryColor)
+    .setColorActive(buttonStepColorOn);
+}
+
 void setupSliders() {
   cp5.addSlider("MasterVolume")
     .setPosition(30, 50)
     .setSize(100, 20)
     .setRange(-24, 24)
-    .setValue(0);
+    .setValue(0)
+    .setColorBackground(buttonStepColorOff)
+    .setColorForeground(buttonStepColorOn);
+
 
   for (int i = 0; i < 7; i++) {
     String volRow = "Volume" + Integer.toString(1+i);
@@ -42,7 +60,9 @@ void setupSliders() {
       .setPosition(width*.15+size*16 + 5, size*i + height*.5 + size/2.5)
       .setSize(80, 10)
       .setRange(-24, 24)
-      .setValue(0);
+      .setValue(0)
+      .setColorBackground(buttonStepColorOff)
+      .setColorForeground(buttonStepColorOn);
   }
 }
 
@@ -55,8 +75,8 @@ void setupDropDown() {
     .setColorBackground(buttonStepColorOff)
     .setColorActive(buttonStepColorOn)
     .setColorForeground(tableColor);
-  
-  for(int i = 0; i < playlistName.length; i++) {
+
+  for (int i = 0; i < playlistName.length; i++) {
     scrollableList.addItem(playlistName[i], i);
   }
 }
@@ -67,7 +87,10 @@ void setupPlayPauseToggle() {
   cp5.addToggle("PlayPause")
     .setPosition(width*.9, 50)
     .setSize(35, 35)
-    .setValue(false);
+    .setValue(false)
+    .setColorBackground(buttonStepColorOff)
+    .setColorForeground(secondaryColor)
+    .setColorActive(buttonStepColorOn);
 }
 
 void PlayPause(boolean theFlag) {
@@ -79,7 +102,10 @@ void PlayPause(boolean theFlag) {
 void setupClearButton() {
   cp5.addButton("Clear")
     .setPosition(width*.85, 50)
-    .setSize(35, 35);
+    .setSize(35, 35)
+    .setColorBackground(buttonStepColorOff)
+    .setColorForeground(secondaryColor)
+    .setColorActive(buttonStepColorOn);
 }
 
 void Clear() {
