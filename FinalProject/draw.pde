@@ -48,7 +48,7 @@ void drawSynth() {
 void drawMetronome() {
   xMetronome = calculateMetronomeXPosition();
   fill(buttonStepColorOn);
-  rect(xMetronome, y, size, size, size, size, 5,5);
+  rect(xMetronome, y +5, size, size -10, 80, 80, 5,5);
 }
 
 void checkRecording() {
