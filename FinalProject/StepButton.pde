@@ -80,6 +80,10 @@ class StepButton {
     drawNumber();
     
     translate(-width*.15 -row*size, -height*.5 -col*size);
+    
+    
+      stroke(255);
+      strokeWeight(2);
   }
 
   void hover() {
@@ -89,9 +93,14 @@ class StepButton {
   }
   
   void setButtonColor() {
-    if(hoverButton == id) stroke(secondaryColor);
-    else stroke(255);
-    
+    if(hoverButton == id) {
+      stroke(secondaryColor);
+      strokeWeight(4);
+    }
+    else {
+      stroke(255);
+      strokeWeight(2);
+    }
     if (this.isClicked) {
       fill(buttonStepColorOn);
     } else {
@@ -102,14 +111,14 @@ class StepButton {
   void drawNumber() {
     if (col == 0 && (row % 4) == 0) {
       translate(size/2 - 3, -size*0.1);
-      fill(buttonStepColorOn);
+      fill(buttonStepColorOff);
       textSize(15);
       text(4*row/16+1, 0, 0); //To write 1, 2, 3, 4
       translate(-size/2 + 3, size*0.1);
     }
     if (col == 6) {
       translate(size/2 - 5, size*1.5);
-      fill(buttonStepColorOn);
+      fill(buttonStepColorOff);
       textSize(15);
       text(row + 1, 0, 0);
       translate(-size/2 + 5, -size*1.5);

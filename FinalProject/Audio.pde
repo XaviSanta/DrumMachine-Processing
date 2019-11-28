@@ -39,8 +39,13 @@ void setPlaylist(int n) {
   } 
 }
 
+int calculateMetronomeColumn(){
+  iMetronome = ((millis()-time)/120) % 16;
+  return iMetronome;
+}
+
 int calculateMetronomeXPosition() {
-  iMetronome = ((millis()-time)/120) % 16; //Number between 0 and 15, it changes in every beat
+  calculateMetronomeColumn();//Number between 0 and 15, it changes in every beat
   
   if(iMetronome != lastIMetronome) {
     playNotes();

@@ -12,6 +12,7 @@ void setupRecorder(int n) {
 }
 
 void startRecording() {
+  out.mute();
   recorder.beginRecord();
   recorderTimer=0; 
   println("BeginRecording");
@@ -20,6 +21,7 @@ void startRecording() {
 void saveRecord() {
   recorder.save();
   recorder.endRecord();
+  out.unmute();
   println("Done saveing.");
   setPlaylist(2);
 }

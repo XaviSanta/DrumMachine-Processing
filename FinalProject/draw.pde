@@ -1,22 +1,19 @@
 int hoverButton;
 
 void draw() {
-  background(255);
+  background(0);
+  strokeWeight(2);
   
   drawTable();
   
-  drawMeshStepButtons();
-  drawSynth();
   if (playToggle) drawMetronome();
   
-  if(recorder.isRecording()){
-    recorderTimer++;
-    if(recorderTimer > 30){
-      saveRecord();
-    }
-  }
+  drawMeshStepButtons();
+  drawSynth();
   
-  if(hoverButton != -1)sBList.get(hoverButton).drawSquare();
+  checkRecording();
+  
+  drawHoveredButton();
 }
 
 
@@ -28,7 +25,6 @@ void drawTable() {
 }
 
 void drawMeshStepButtons() {
-  strokeWeight(2);
   stroke(0);
   for(int i = 0; i < sBList.size(); i++){
     sBList.get(i).drawSquare();
@@ -51,5 +47,19 @@ void drawSynth() {
 
 void drawMetronome() {
   xMetronome = calculateMetronomeXPosition();
-  rect(xMetronome, y, size, size, 15, 15, 15, 15);
+  fill(buttonStepColorOn);
+  rect(xMetronome, y, size, size, size, size, 5,5);
+}
+
+void checkRecording() {
+ if(recorder.isRecording()){
+    recorderTimer++;
+    if(recorderTimer > 30){
+      saveRecord();
+    }
+  } 
+}
+
+void drawHoveredButton() { 
+  if(hoverButton != -1) sBList.get(hoverButton).drawSquare(); 
 }
