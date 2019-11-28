@@ -1,18 +1,25 @@
+int hoverButton;
+
 void draw() {
-  background(0);
+  background(255);
+  
   drawTable();
+  
   drawMeshStepButtons();
   drawSynth();
   if (playToggle) drawMetronome();
+  
   if(recorder.isRecording()){
     recorderTimer++;
     if(recorderTimer > 30){
-      
       saveRecord();
     }
-    
   }
+  
+  if(hoverButton != -1)sBList.get(hoverButton).drawSquare();
 }
+
+
 
 void drawTable() {
   stroke(0);

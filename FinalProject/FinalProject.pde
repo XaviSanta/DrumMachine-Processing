@@ -4,7 +4,7 @@ import java.util.*;
 
 ControlP5 cp5;
 String fileName;
-ScrollableList scrollableList;
+DropdownList dropDownList;
 
 void setup() {
   size(1024, 768);
@@ -14,7 +14,7 @@ void setup() {
 
   setupMicrphone();
   
-  setupRecorderButton();
+  setupRecorderButtons();
   setupRecorder(0);
   
   setupSliders();
@@ -34,13 +34,22 @@ void mouseClicked() {
   }
 }
 
-void setupRecorderButton() {
+void mouseMoved() {
+  if (isInStepButtonRange(mouseX, mouseY)) {
+     hoverButton = getStepButton(mouseX, mouseY).id;
+  }
+  else {
+    hoverButton = -1;
+  }
+}
+
+void setupRecorderButtons() {
 
   for (int i = 0; i < 7; i++) {
     String volRow = "Record" + Integer.toString(1+i);
     cp5.addButton(volRow)
       .setPosition(30, size*i + height*.5)
-      .setSize(size, size)
+      .setSize(size*2, size)
       .setColorBackground(buttonStepColorOff)
       .setColorForeground(secondaryColor)
       .setColorActive(buttonStepColorOn);
@@ -70,17 +79,19 @@ void setupSliders() {
 }
 
 void setupDropDown() {
-  scrollableList = cp5.addScrollableList("Playlist")
+  dropDownList = cp5.addDropdownList("Playlist")
     .setPosition(30, 80)
     .setBackgroundColor(buttonStepColorOn)
-    .setItemHeight(15)
-    .setBarHeight(15)
+    .setItemHeight(20)
+    .setBarHeight(20)
+    .setValue(1)
+    .setOpen(false)
     .setColorBackground(buttonStepColorOff)
-    .setColorActive(buttonStepColorOn)
-    .setColorForeground(tableColor);
+    .setColorActive(tableColor)
+    .setColorForeground(buttonStepColorOn);
 
   for (int i = 0; i < playlistName.length; i++) {
-    scrollableList.addItem(playlistName[i], i);
+    dropDownList.addItem(playlistName[i], i);
   }
 }
 

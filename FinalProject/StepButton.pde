@@ -38,7 +38,7 @@ int getButtonIdFromCoordenates(int x, int y) {
 class StepButton { 
   int row, col, id; 
   boolean isClicked;
-
+  
   StepButton (int row, int col, int id) {  
     this.row = row;
     this.col = col;
@@ -75,14 +75,23 @@ class StepButton {
     setButtonColor();
 
     translate(width*.15 + row*size, height*.5 + col*size);
-
+    
     rect(0, 0, size, size, 15, 15, 15, 15);
     drawNumber();
-
+    
     translate(-width*.15 -row*size, -height*.5 -col*size);
   }
 
+  void hover() {
+    stroke(255,234,21);
+    drawSquare();
+    
+  }
+  
   void setButtonColor() {
+    if(hoverButton == id) stroke(secondaryColor);
+    else stroke(255);
+    
     if (this.isClicked) {
       fill(buttonStepColorOn);
     } else {
