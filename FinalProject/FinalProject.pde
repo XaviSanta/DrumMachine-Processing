@@ -15,7 +15,10 @@ void setup() {
   setupMicrphone();
   
   setupRecorderButtons();
-  setupRecorder(0);
+  setupRecorderIn(0);
+  
+  setupRecorderOutButton();
+  setupRecorderOut();
   
   setupSliders();
   setupDropDown();
@@ -54,6 +57,15 @@ void setupRecorderButtons() {
       .setColorForeground(secondaryColor)
       .setColorActive(buttonStepColorOn);
   }
+}
+
+void setupRecorderOutButton() {
+  cp5.addToggle("RecordOutput")
+      .setPosition(width*.9, height*.4)
+      .setSize(size + size/2, size)
+      .setColorBackground(buttonStepColorOff)
+      .setColorForeground(secondaryColor)
+      .setColorActive(buttonStepColorOn);
 }
 
 void setupSliders() {

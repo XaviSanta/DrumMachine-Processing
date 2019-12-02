@@ -14,6 +14,8 @@ void draw() {
   checkRecording();
   
   drawHoveredButton();
+  
+  showPlaylistName();
 }
 
 
@@ -54,12 +56,25 @@ void drawMetronome() {
 void checkRecording() {
  if(recorder.isRecording()){
     recorderTimer++;
+    text("Recording...", 30, height*.5 - 20);
     if(recorderTimer > 30){
       saveRecord();
     }
   } 
+ if(recorderOut.isRecording()) {
+    text("Recording...", width*.9, height*.4 - 20);
+ }
+   
 }
 
 void drawHoveredButton() { 
   if(hoverButton != -1) sBList.get(hoverButton).drawSquare(); 
+}
+
+void showPlaylistName() {
+  textAlign(CENTER);
+  textSize(18);
+  text("Playing " + playlistName[iPlaylist], width/2, 25);
+  textAlign(LEFT);
+  textSize(12);
 }

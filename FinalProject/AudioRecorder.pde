@@ -1,4 +1,6 @@
 AudioRecorder recorder;
+AudioRecorder recorderOut;
+int counterSongs = 0;
 AudioInput in;
 int numCustom = 0;
 float recorderTimer;
@@ -7,8 +9,20 @@ void setupMicrphone() {
   in = minim.getLineIn();
 }
 
-void setupRecorder(int n) {
+void setupRecorderIn(int n) {
   recorder = minim.createRecorder(in, "/data/Custom"+n+".wav");
+}
+void setupRecorderOut() {
+  counterSongs++;
+  recorderOut = minim.createRecorder(out, "/recordedSongs/song" + counterSongs +".wav");
+}
+
+void RecordOutput() {
+  if ( recorderOut.isRecording() ) saveRecordOut();
+  else {
+    recorderOut.beginRecord();
+    println("Recording...");
+  }
 }
 
 void startRecording() {
@@ -26,10 +40,16 @@ void saveRecord() {
   setPlaylist(2);
 }
 
+void saveRecordOut() {
+  recorderOut.save();
+  recorderOut.endRecord();
+  println("Done saveing.");
+}
+
 void Record1() {
   if ( recorder.isRecording() ) saveRecord();
   else {
-    setupRecorder(1);
+    setupRecorderIn(1);
     startRecording();
   }
 }
@@ -37,7 +57,7 @@ void Record1() {
 void Record2() {
   if ( recorder.isRecording() ) saveRecord();
   else {
-    setupRecorder(2);
+    setupRecorderIn(2);
     startRecording();
   }
 }
@@ -45,7 +65,7 @@ void Record2() {
 void Record3() {
   if ( recorder.isRecording() ) saveRecord();
   else {
-    setupRecorder(3);
+    setupRecorderIn(3);
     startRecording();
   }
 }
@@ -53,7 +73,7 @@ void Record3() {
 void Record4() {
   if ( recorder.isRecording() ) saveRecord();
   else {
-    setupRecorder(4);
+    setupRecorderIn(4);
     startRecording();
   }
 }
@@ -61,7 +81,7 @@ void Record4() {
 void Record5() {
   if ( recorder.isRecording() ) saveRecord();
   else {
-    setupRecorder(5);
+    setupRecorderIn(5);
     startRecording();
   }
 }
@@ -69,7 +89,7 @@ void Record5() {
 void Record6() {
   if ( recorder.isRecording() ) saveRecord();
   else {
-    setupRecorder(6);
+    setupRecorderIn(6);
     startRecording();
   }
 }
@@ -77,7 +97,7 @@ void Record6() {
 void Record7() {
   if ( recorder.isRecording() ) saveRecord();
   else {
-    setupRecorder(7);
+    setupRecorderIn(7);
     startRecording();
   }
 }

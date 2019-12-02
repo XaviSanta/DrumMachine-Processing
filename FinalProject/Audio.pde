@@ -5,8 +5,8 @@ Minim      minim;
 //FilePlayer filePlayer;
 Sampler [] sound = new Sampler[7];
 String [] playlistName = new String[3];
-int iPlaylist=0;
 AudioOutput out;
+int iPlaylist=0;
 
 int time;
 float xMetronome; 
@@ -37,6 +37,8 @@ void setPlaylist(int n) {
     sound[i] = new Sampler(playlistName[n] + str(i+1) + ".wav", 7, minim);
     sound[i].patch(out);
   } 
+  
+  iPlaylist=n;
 }
 
 int calculateMetronomeColumn(){
