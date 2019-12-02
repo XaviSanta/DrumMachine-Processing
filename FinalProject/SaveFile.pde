@@ -1,9 +1,3 @@
-//String[] buttonsFile = loadStrings("");
-
-void keyPressed() {
-  getButtonsFromFile(); 
-}
-
 void saveButtonsToFile() {
   String listButtonsClicked = "";
   for(StepButton sb : sBList) {
@@ -11,16 +5,20 @@ void saveButtonsToFile() {
      listButtonsClicked += " " + sb.id;
    }
   }
+  println("ASDF");
   
   String[] splitedList = split(listButtonsClicked, ' ');
-  saveStrings("SavedButtons.txt", splitedList);
-   
+  saveStrings("/savedButtons/SavedButtons2.txt", splitedList);
 }
 
-void getButtonsFromFile() {
-   String[] idButtons = loadStrings("SavedButtons.txt");
-   for(int i = 1; i < idButtons.length; i++) {
-     println(idButtons[i]);
-     sBList.get(Integer.parseInt(idButtons[i])).activate();
-   }
+void activateButtonsFromFile(int n) {
+  Clear();
+  String[] idButtons = loadStrings("/savedButtons/SavedButtons" + n + ".txt");
+  for(int i = 1; i < idButtons.length; i++) {
+    sBList.get(Integer.parseInt(idButtons[i])).activate();
+  }
+}
+
+void DDButtonsFile(int n) {
+  activateButtonsFromFile(n);
 }

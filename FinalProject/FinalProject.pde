@@ -4,7 +4,8 @@ import java.util.*;
 
 ControlP5 cp5;
 String fileName;
-DropdownList dropDownList;
+DropdownList dropDownListPlaylist;
+DropdownList dropDownListFileButtons;
 
 void setup() {
   size(1024, 768);
@@ -21,8 +22,11 @@ void setup() {
   setupRecorderOut();
   
   setupSliders();
-  setupDropDown();
-
+  setupDropDownPlaylist();
+  
+  setupSaveFileButton();
+  setupDropDownFileButtons();
+  
   setupPlayPauseToggle();
   setupClearButton();
 
@@ -90,8 +94,8 @@ void setupSliders() {
   }
 }
 
-void setupDropDown() {
-  dropDownList = cp5.addDropdownList("Playlist")
+void setupDropDownPlaylist() {
+  dropDownListPlaylist = cp5.addDropdownList("Playlist")
     .setPosition(30, 80)
     .setBackgroundColor(buttonStepColorOn)
     .setItemHeight(20)
@@ -103,11 +107,35 @@ void setupDropDown() {
     .setColorForeground(buttonStepColorOn);
 
   for (int i = 0; i < playlistName.length; i++) {
-    dropDownList.addItem(playlistName[i], i);
+    dropDownListPlaylist.addItem(playlistName[i], i);
   }
 }
 
+void setupSaveFileButton() {
+  cp5.addButton("saveButtonsToFile")
+      .setPosition(30, 200)
+      .setSize(size*2, size)
+      .setColorBackground(buttonStepColorOff)
+      .setColorForeground(secondaryColor)
+      .setColorActive(buttonStepColorOn);
+}
 
+void setupDropDownFileButtons() {
+  dropDownListFileButtons = cp5.addDropdownList("DDButtonsFile")
+    .setPosition(30, 260)
+    .setBackgroundColor(buttonStepColorOn)
+    .setItemHeight(20)
+    .setBarHeight(20)
+    .setOpen(false)
+    .setColorBackground(buttonStepColorOff)
+    .setColorActive(tableColor)
+    .setColorForeground(buttonStepColorOn); 
+    
+  dropDownListFileButtons.addItem("Demo1" , 0);
+  dropDownListFileButtons.addItem("Demo2" , 1);
+  dropDownListFileButtons.addItem("Custom" ,2);
+  
+}
 
 void setupPlayPauseToggle() {
   cp5.addToggle("PlayPause")
