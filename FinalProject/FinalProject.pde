@@ -69,6 +69,7 @@ void setupRecorderOutButton() {
       .setSize(size + size/2, size)
       .setColorBackground(buttonStepColorOff)
       .setColorForeground(secondaryColor)
+    .setColorLabel(buttonStepColorOff)
       .setColorActive(buttonStepColorOn);
 }
 
@@ -79,6 +80,7 @@ void setupSliders() {
     .setRange(-24, 24)
     .setValue(0)
     .setColorBackground(buttonStepColorOff)
+    .setColorLabel(buttonStepColorOff)
     .setColorForeground(buttonStepColorOn);
 
 
@@ -144,6 +146,7 @@ void setupPlayPauseToggle() {
     .setValue(false)
     .setColorBackground(buttonStepColorOff)
     .setColorForeground(secondaryColor)
+    .setColorLabel(buttonStepColorOff)
     .setColorActive(buttonStepColorOn);
 }
 
