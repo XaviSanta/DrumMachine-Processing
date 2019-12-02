@@ -1,6 +1,6 @@
 # DrumMachine-Processing
 ## CS123 Maynooth Univeristy
-![ ](https://thumbs.subefotos.com/ea6a65c02cddc5b86cbf5329662439e7o.jpg)
+![Capture](https://github.com/XaviSanta/DrumMachine-Processing/blob/master/FinalProject/images/Capture.PNG)
 # Functionalities:
 * Play sounds in 120 bpm
 * Modify the master volume
