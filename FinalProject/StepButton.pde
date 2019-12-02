@@ -30,32 +30,25 @@ int getButtonIdFromCoordenates(int x, int y) {
   int xInitial = 154;
   int yInitial = 385;
 
-  int row = (x-xInitial)/size;
-  int col = (y-yInitial)/size;
-  return row * 7 + col;
+  int col = (x-xInitial)/size;
+  int row = (y-yInitial)/size;
+  return col * 7 + row;
 }
 
 class StepButton { 
-  int row, col, id; 
+  int col, row, id; 
   boolean isClicked;
   
-  StepButton (int row, int col, int id) {  
-    this.row = row;
+  
+  StepButton (int col, int row, int id) {  
     this.col = col;
+    this.row = row;
     this.id = id;
     isClicked = false;
   } 
 
   int getId() {
     return id;
-  }
-
-  int getButtonRow() { 
-    return row;
-  }
-
-  int getButtonCol() { 
-    return col;
   }
 
   void activate() {
@@ -68,22 +61,21 @@ class StepButton {
   }
 
   void playSound() {
-    sound[col].trigger();
+    sound[row].trigger();
   }
 
   void drawSquare() {
     setButtonColor();
 
-    translate(width*.15 + row*size, height*.5 + col*size);
+    translate(width*.15 + col*size, height*.5 + row*size);
     
     rect(0, 0, size, size, 15, 15, 15, 15);
     drawNumber();
     
-    translate(-width*.15 -row*size, -height*.5 -col*size);
+    translate(-width*.15 -col*size, -height*.5 -row*size);
     
-    
-      stroke(255);
-      strokeWeight(2);
+    stroke(255);
+    strokeWeight(2);
   }
 
   void hover() {
@@ -109,18 +101,18 @@ class StepButton {
   }
 
   void drawNumber() {
-    if (col == 0 && (row % 4) == 0) {
+    if (row == 0 && (col % 4) == 0) {
       translate(size/2 - 3, -size*0.1);
       fill(buttonStepColorOff);
       textSize(15);
-      text(4*row/16+1, 0, 0); //To write 1, 2, 3, 4
+      text(4*col/16+1, 0, 0); //To write 1, 2, 3, 4
       translate(-size/2 + 3, size*0.1);
     }
-    if (col == 6) {
+    if (row == 6) {
       translate(size/2 - 5, size*1.5);
       fill(buttonStepColorOff);
       textSize(15);
-      text(row + 1, 0, 0);
+      text(col + 1, 0, 0);
       translate(-size/2 + 5, -size*1.5);
     }
   }

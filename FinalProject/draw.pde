@@ -74,7 +74,7 @@ void drawHoveredButton() {
 void showPlaylistName() {
   textAlign(CENTER);
   textSize(18);
-  text("Playing " + playlistName[iPlaylist], width/2, 25);
+  text("Playing " + playlistName[iPlaylist] + " playlist", width/2, 25);
   textAlign(LEFT);
   textSize(12);
 }
