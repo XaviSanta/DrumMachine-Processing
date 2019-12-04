@@ -11,8 +11,9 @@ void setup() {
   size(1024, 768);
   cp5 = new ControlP5(this);
   
-  setupMicrphone();
+  
   setupAudio();  
+  setupMicrphone();
   
   setupRecorderButtons();
   setupRecorderIn(0);
