@@ -44,6 +44,7 @@ void mouseMoved() {
   if (isInStepButtonRange(mouseX, mouseY)) {
      hoverButton = getStepButton(mouseX, mouseY).id;
   }
+  
   else {
     hoverButton = -1;
   }
