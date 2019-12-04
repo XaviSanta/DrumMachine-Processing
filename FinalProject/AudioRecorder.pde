@@ -4,9 +4,15 @@ int counterSongs = 0;
 AudioInput in;
 int numCustom = 0;
 float recorderTimer;
+boolean microhponeWorks = false;
 
 void setupMicrphone() {
-  in = minim.getLineIn();
+  try{
+    in = minim.getLineIn(); 
+    microhponeWorks = true;
+  } catch (Exception e) {
+    println("ERROR setting up microphone. " + e);
+  }
 }
 
 void setupRecorderIn(int n) {

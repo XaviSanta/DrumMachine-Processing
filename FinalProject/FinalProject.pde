@@ -10,10 +10,9 @@ DropdownList dropDownListFileButtons;
 void setup() {
   size(1024, 768);
   cp5 = new ControlP5(this);
-
-  setupAudio();  
-
+  
   setupMicrphone();
+  setupAudio();  
   
   setupRecorderButtons();
   setupRecorderIn(0);

@@ -31,10 +31,9 @@ DropdownList dropDownListFileButtons;
 public void setup() {
   
   cp5 = new ControlP5(this);
-
-  setupAudio();  
-
+  
   setupMicrphone();
+  setupAudio();  
   
   setupRecorderButtons();
   setupRecorderIn(0);
@@ -298,9 +297,15 @@ int counterSongs = 0;
 AudioInput in;
 int numCustom = 0;
 float recorderTimer;
+boolean microhponeWorks = false;
 
 public void setupMicrphone() {
-  in = minim.getLineIn();
+  try{
+    in = minim.getLineIn(); 
+    microhponeWorks = true;
+  } catch (Exception e) {
+    println("ERROR setting up microphone. " + e);
+  }
 }
 
 public void setupRecorderIn(int n) {
@@ -617,17 +622,19 @@ public void drawMetronome() {
 }
 
 public void checkRecording() {
- if(recorder.isRecording()){
-    recorderTimer++;
-    text("Recording...", 30, height*.5f - 20);
-    if(recorderTimer > 30){
-      saveRecord();
+  if(microhponeWorks) {
+    if(recorder.isRecording()){
+      recorderTimer++;
+      text("Recording...", 30, height*.5f - 20);
+      if(recorderTimer > 30){
+        saveRecord();
+      }
     }
-  } 
+  }
+  
  if(recorderOut.isRecording()) {
     text("Recording...", width*.9f, height*.4f - 20);
  }
-   
 }
 
 public void drawHoveredButton() { 

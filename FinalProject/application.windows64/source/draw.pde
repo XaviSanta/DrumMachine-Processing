@@ -54,17 +54,19 @@ void drawMetronome() {
 }
 
 void checkRecording() {
- if(recorder.isRecording()){
-    recorderTimer++;
-    text("Recording...", 30, height*.5 - 20);
-    if(recorderTimer > 30){
-      saveRecord();
+  if(microhponeWorks) {
+    if(recorder.isRecording()){
+      recorderTimer++;
+      text("Recording...", 30, height*.5 - 20);
+      if(recorderTimer > 30){
+        saveRecord();
+      }
     }
-  } 
+  }
+  
  if(recorderOut.isRecording()) {
     text("Recording...", width*.9, height*.4 - 20);
  }
-   
 }
 
 void drawHoveredButton() { 
