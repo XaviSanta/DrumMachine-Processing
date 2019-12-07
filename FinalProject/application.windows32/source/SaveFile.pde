@@ -1,3 +1,5 @@
+/* Xavier Santamaria */
+
 void saveButtonsToFile() {
   String listButtonsClicked = "";
   for(StepButton sb : sBList) {
@@ -5,10 +7,10 @@ void saveButtonsToFile() {
      listButtonsClicked += " " + sb.id;
    }
   }
-  println("ASDF");
   
   String[] splitedList = split(listButtonsClicked, ' ');
   saveStrings("/savedButtons/SavedButtons2.txt", splitedList);
+  println("Configuration buttons saved in './savedButtons/SavedButtons2.txt'");
 }
 
 void activateButtonsFromFile(int n) {
@@ -19,6 +21,6 @@ void activateButtonsFromFile(int n) {
   }
 }
 
-void DDButtonsFile(int n) {
+void DDButtonsFile(int n) { // Drop Down Buttons
   activateButtonsFromFile(n);
 }

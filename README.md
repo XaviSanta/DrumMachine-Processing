@@ -1,4 +1,4 @@
-# DrumMachine-Processing
+# DrumMachine-Processing by Xavier Santamaria
 ## CS123 Maynooth Univeristy
 ![Capture](https://github.com/XaviSanta/DrumMachine-Processing/blob/master/FinalProject/images/Capture.PNG)
 # Functionalities:

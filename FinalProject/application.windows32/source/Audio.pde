@@ -1,3 +1,5 @@
+/* Xavier Santamaria */
+
 import ddf.minim.*;
 import ddf.minim.ugens.*;
 
@@ -12,9 +14,7 @@ int time;
 float xMetronome; 
 int initX=153;
 int y = 383 + 7 * 45;
-int bpm = 80;
-int iMetronome;
-int lastIMetronome = -1;
+int iMetronome, lastIMetronome = -1;
 boolean playToggle = false;
 
 void setupAudio() {
@@ -24,21 +24,15 @@ void setupAudio() {
   playlistName[0] = "House";
   playlistName[1] = "Rock";
   playlistName[2] = "Custom";
-  
-  setPlaylist(0);
-}
-
-void Playlist(int n){
-    setPlaylist(n);
 }
 
 void setPlaylist(int n) {
   for(int i = 0; i < 7; i++) {
-    sound[i] = new Sampler(playlistName[n] + str(i+1) + ".wav", 7, minim);
-    sound[i].patch(out);
+    sound[i] = new Sampler(playlistName[n] + str(i+1) + ".wav", 7, minim); // Load the sounds of the playlist 
+    sound[i].patch(out);  // And then patch them all in the output
   } 
   
-  iPlaylist=n;
+  iPlaylist = n; // Save in a variable the playlist we are using so we can print later in a text
 }
 
 int calculateMetronomeColumn(){
@@ -49,7 +43,7 @@ int calculateMetronomeColumn(){
 int calculateMetronomeXPosition() {
   calculateMetronomeColumn();//Number between 0 and 15, it changes in every beat
   
-  if(iMetronome != lastIMetronome) {
+  if(iMetronome != lastIMetronome) { // if it changes, play the column notes
     playNotes();
   }
   
@@ -58,19 +52,15 @@ int calculateMetronomeXPosition() {
 }
 
 void playNotes() {
-  for(int i = 0; i < 16; i++) {
-    for(int j = 0; j < 7; j++) {
-      StepButton sb = sBList.get(j+iMetronome*7);
-      if(sb.isClicked && i == 0) {
-        sb.playSound();
-      }
+  for(int row = 0; row < 7; row++) {
+    StepButton sb = sBList.get(row + iMetronome*7); // Get the column buttons
+    if(sb.isClicked) {
+      sb.playSound();
     }
   }
 }
 
-void MasterVolume(int theMVol) {
-  out.setGain(theMVol);
-}
+
 
 //void Volume1(int theRowVol) {
 //  sound[0].amplitude.;

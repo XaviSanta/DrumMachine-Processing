@@ -19,41 +19,39 @@ import java.io.IOException;
 
 public class FinalProject extends PApplet {
 
-/* Xavi Santamaria */
+/* Xavier Santamaria */
 
  
 
 ControlP5 cp5;
 String fileName;
-DropdownList dropDownListPlaylist;
-DropdownList dropDownListFileButtons;
 
 public void setup() {
   
   cp5 = new ControlP5(this);
   
-  setupMicrphone();
   setupAudio();  
+  setupMicrphone();
   
   setupRecorderButtons();
-  setupRecorderIn(0);
+  // this recorderIn (input) is not used but i had to instantiate one recorder 
+  // otherwise the comprobations i do in the draw throw errors
+  setupRecorderIn(0); 
   
-  setupRecorderOutButton();
+  setupRecorderOutButton(); // Save the song
   setupRecorderOut();
   
-  setupSliders();
+  setupMasterVolumeSlider();
   setupDropDownPlaylist();
   
-  setupSaveFileButton();
+  setupSaveFileButton(); // Save File = save in a file the buttons the user has clicked as a configuration
   setupDropDownFileButtons();
   
   setupPlayPauseToggle();
   setupClearButton();
 
-  setupStepButtons();
+  setupStepButtons(); // Step button are the buttons that once clicked produce sounds
 }
-
-
 
 public void mouseClicked() {  
   if (isInStepButtonRange(mouseX, mouseY)) {
@@ -70,126 +68,9 @@ public void mouseMoved() {
   }
 }
 
-public void setupRecorderButtons() {
 
-  for (int i = 0; i < 7; i++) {
-    String volRow = "Record" + Integer.toString(1+i);
-    cp5.addButton(volRow)
-      .setPosition(30, size*i + height*.5f)
-      .setSize(size*2, size)
-      .setColorBackground(buttonStepColorOff)
-      .setColorForeground(secondaryColor)
-      .setColorActive(buttonStepColorOn);
-  }
-}
+/* Xavier Santamaria */
 
-public void setupRecorderOutButton() {
-  cp5.addToggle("RecordOutput")
-      .setPosition(width*.9f, height*.4f)
-      .setSize(size + size/2, size)
-      .setColorBackground(buttonStepColorOff)
-      .setColorForeground(secondaryColor)
-    .setColorLabel(buttonStepColorOff)
-      .setColorActive(buttonStepColorOn);
-}
-
-public void setupSliders() {
-  cp5.addSlider("MasterVolume")
-    .setPosition(30, 50)
-    .setSize(100, 20)
-    .setRange(-24, 24)
-    .setValue(0)
-    .setColorBackground(buttonStepColorOff)
-    .setColorLabel(buttonStepColorOff)
-    .setColorForeground(buttonStepColorOn);
-
-
-  for (int i = 0; i < 7; i++) {
-    String volRow = "Volume" + Integer.toString(1+i);
-    cp5.addSlider(volRow)
-      .setPosition(width*.15f+size*16 + 5, size*i + height*.5f + size/2.5f)
-      .setSize(80, 10)
-      .setRange(-24, 24)
-      .setValue(0)
-      .setColorBackground(buttonStepColorOff)
-      .setColorForeground(buttonStepColorOn);
-  }
-}
-
-public void setupDropDownPlaylist() {
-  dropDownListPlaylist = cp5.addDropdownList("Playlist")
-    .setPosition(30, 80)
-    .setBackgroundColor(buttonStepColorOn)
-    .setItemHeight(20)
-    .setBarHeight(20)
-    .setValue(1)
-    .setOpen(false)
-    .setColorBackground(buttonStepColorOff)
-    .setColorActive(tableColor)
-    .setColorForeground(buttonStepColorOn);
-
-  for (int i = 0; i < playlistName.length; i++) {
-    dropDownListPlaylist.addItem(playlistName[i], i);
-  }
-}
-
-public void setupSaveFileButton() {
-  cp5.addButton("saveButtonsToFile")
-      .setPosition(30, 200)
-      .setSize(size*2, size)
-      .setColorBackground(buttonStepColorOff)
-      .setColorForeground(secondaryColor)
-      .setColorActive(buttonStepColorOn);
-}
-
-public void setupDropDownFileButtons() {
-  dropDownListFileButtons = cp5.addDropdownList("DDButtonsFile")
-    .setPosition(30, 260)
-    .setBackgroundColor(buttonStepColorOn)
-    .setItemHeight(20)
-    .setBarHeight(20)
-    .setOpen(false)
-    .setColorBackground(buttonStepColorOff)
-    .setColorActive(tableColor)
-    .setColorForeground(buttonStepColorOn); 
-    
-  dropDownListFileButtons.addItem("Demo1" , 0);
-  dropDownListFileButtons.addItem("Demo2" , 1);
-  dropDownListFileButtons.addItem("Custom" ,2);
-  
-}
-
-public void setupPlayPauseToggle() {
-  cp5.addToggle("PlayPause")
-    .setPosition(width*.9f, 50)
-    .setSize(35, 35)
-    .setValue(false)
-    .setColorBackground(buttonStepColorOff)
-    .setColorForeground(secondaryColor)
-    .setColorLabel(buttonStepColorOff)
-    .setColorActive(buttonStepColorOn);
-}
-
-public void PlayPause(boolean theFlag) {
-  playToggle = theFlag;
-  time = millis(); //To start from the initial column
-}
-
-
-public void setupClearButton() {
-  cp5.addButton("Clear")
-    .setPosition(width*.85f, 50)
-    .setSize(35, 35)
-    .setColorBackground(buttonStepColorOff)
-    .setColorForeground(secondaryColor)
-    .setColorActive(buttonStepColorOn);
-}
-
-public void Clear() {
-  for (int i = 0; i < sBList.size(); i++) {
-    sBList.get(i).isClicked = false;
-  }
-}
 
 
 
@@ -204,9 +85,7 @@ int time;
 float xMetronome; 
 int initX=153;
 int y = 383 + 7 * 45;
-int bpm = 80;
-int iMetronome;
-int lastIMetronome = -1;
+int iMetronome, lastIMetronome = -1;
 boolean playToggle = false;
 
 public void setupAudio() {
@@ -216,21 +95,15 @@ public void setupAudio() {
   playlistName[0] = "House";
   playlistName[1] = "Rock";
   playlistName[2] = "Custom";
-  
-  setPlaylist(0);
-}
-
-public void Playlist(int n){
-    setPlaylist(n);
 }
 
 public void setPlaylist(int n) {
   for(int i = 0; i < 7; i++) {
-    sound[i] = new Sampler(playlistName[n] + str(i+1) + ".wav", 7, minim);
-    sound[i].patch(out);
+    sound[i] = new Sampler(playlistName[n] + str(i+1) + ".wav", 7, minim); // Load the sounds of the playlist 
+    sound[i].patch(out);  // And then patch them all in the output
   } 
   
-  iPlaylist=n;
+  iPlaylist = n; // Save in a variable the playlist we are using so we can print later in a text
 }
 
 public int calculateMetronomeColumn(){
@@ -241,7 +114,7 @@ public int calculateMetronomeColumn(){
 public int calculateMetronomeXPosition() {
   calculateMetronomeColumn();//Number between 0 and 15, it changes in every beat
   
-  if(iMetronome != lastIMetronome) {
+  if(iMetronome != lastIMetronome) { // if it changes, play the column notes
     playNotes();
   }
   
@@ -250,19 +123,15 @@ public int calculateMetronomeXPosition() {
 }
 
 public void playNotes() {
-  for(int i = 0; i < 16; i++) {
-    for(int j = 0; j < 7; j++) {
-      StepButton sb = sBList.get(j+iMetronome*7);
-      if(sb.isClicked && i == 0) {
-        sb.playSound();
-      }
+  for(int row = 0; row < 7; row++) {
+    StepButton sb = sBList.get(row + iMetronome*7); // Get the column buttons
+    if(sb.isClicked) {
+      sb.playSound();
     }
   }
 }
 
-public void MasterVolume(int theMVol) {
-  out.setGain(theMVol);
-}
+
 
 //void Volume1(int theRowVol) {
 //  sound[0].amplitude.;
@@ -291,6 +160,8 @@ public void MasterVolume(int theMVol) {
 //  AudioSample p = audioList.get(6);
 //  p.setGain(theRowVol);
 //}
+/* Xavier Santamaria */
+
 AudioRecorder recorder;
 AudioRecorder recorderOut;
 int counterSongs = 0;
@@ -311,14 +182,15 @@ public void setupMicrphone() {
 public void setupRecorderIn(int n) {
   recorder = minim.createRecorder(in, "/data/Custom"+n+".wav");
 }
+
 public void setupRecorderOut() {
-  counterSongs++;
   recorderOut = minim.createRecorder(out, "/recordedSongs/song" + counterSongs +".wav");
 }
 
 public void RecordOutput() {
   if ( recorderOut.isRecording() ) saveRecordOut();
   else {
+    setupRecorderOut();
     recorderOut.beginRecord();
     println("Recording...");
   }
@@ -342,7 +214,8 @@ public void saveRecord() {
 public void saveRecordOut() {
   recorderOut.save();
   recorderOut.endRecord();
-  println("Done saveing.");
+  println("Done saving. New song available in './recordedSongs/song" + counterSongs + ".wav' \n");
+  counterSongs++;
 }
 
 public void Record1() {
@@ -400,6 +273,137 @@ public void Record7() {
     startRecording();
   }
 }
+/* Xavier Santamaria */
+
+DropdownList dropDownListPlaylist;
+DropdownList dropDownListFileButtons;
+
+public void setupRecorderButtons() {
+  for (int i = 0; i < 7; i++) {
+    String volRow = "Record" + Integer.toString(1+i);
+    cp5.addButton(volRow)
+      .setPosition(30, size*i + height*.5f)
+      .setSize(size*2, size)
+      .setColorBackground(buttonStepColorOff)
+      .setColorForeground(secondaryColor)
+      .setColorActive(buttonStepColorOn);
+  }
+}
+
+public void setupRecorderOutButton() {
+  cp5.addToggle("RecordOutput")
+      .setPosition(width*.9f, height*.4f)
+      .setSize(size + size/2, size)
+      .setColorBackground(buttonStepColorOff)
+      .setColorForeground(secondaryColor)
+      .setColorLabel(buttonStepColorOff)
+      .setColorActive(buttonStepColorOn);
+}
+
+public void setupMasterVolumeSlider() {
+  cp5.addSlider("MasterVolume")
+    .setPosition(30, 50)
+    .setSize(100, 20)
+    .setRange(-24, 24)
+    .setValue(0)
+    .setColorBackground(buttonStepColorOff)
+    .setColorLabel(buttonStepColorOff)
+    .setColorForeground(buttonStepColorOn);
+
+
+  for (int i = 0; i < 7; i++) {
+    String volRow = "Volume" + Integer.toString(1+i);
+    cp5.addSlider(volRow)
+      .setPosition(width*.15f+size*16 + 5, size*i + height*.5f + size/2.5f)
+      .setSize(80, 10)
+      .setRange(-24, 24)
+      .setValue(0)
+      .setColorBackground(buttonStepColorOff)
+      .setColorForeground(buttonStepColorOn);
+  }
+}
+public void MasterVolume(int theMVol) {
+  out.setGain(theMVol);
+}
+
+
+public void setupDropDownPlaylist() {
+  dropDownListPlaylist = cp5.addDropdownList("Playlist")
+    .setPosition(30, 80)
+    .setBackgroundColor(buttonStepColorOn)
+    .setItemHeight(20)
+    .setBarHeight(20)
+    .setValue(1)
+    .setOpen(false)
+    .setColorBackground(buttonStepColorOff)
+    .setColorActive(tableColor)
+    .setColorForeground(buttonStepColorOn);
+
+  for (int i = 0; i < playlistName.length; i++) {
+    dropDownListPlaylist.addItem(playlistName[i], i);
+  }
+}
+public void Playlist(int n){
+    setPlaylist(n);
+}
+
+public void setupSaveFileButton() {
+  cp5.addButton("saveButtonsToFile")
+      .setPosition(30, 200)
+      .setSize(size*2, size)
+      .setColorBackground(buttonStepColorOff)
+      .setColorForeground(secondaryColor)
+      .setColorActive(buttonStepColorOn);
+}
+
+public void setupDropDownFileButtons() {
+  dropDownListFileButtons = cp5.addDropdownList("DDButtonsFile")
+    .setPosition(30, 260)
+    .setBackgroundColor(buttonStepColorOn)
+    .setItemHeight(20)
+    .setBarHeight(20)
+    .setOpen(false)
+    .setColorBackground(buttonStepColorOff)
+    .setColorActive(tableColor)
+    .setColorForeground(buttonStepColorOn); 
+    
+  dropDownListFileButtons.addItem("Demo1" , 0);
+  dropDownListFileButtons.addItem("Demo2" , 1);
+  dropDownListFileButtons.addItem("Custom" ,2);
+  
+}
+
+public void setupPlayPauseToggle() {
+  cp5.addToggle("PlayPause")
+    .setPosition(width*.9f, 50)
+    .setSize(35, 35)
+    .setValue(false)
+    .setColorBackground(buttonStepColorOff)
+    .setColorForeground(secondaryColor)
+    .setColorLabel(buttonStepColorOff)
+    .setColorActive(buttonStepColorOn);
+}
+public void PlayPause(boolean theFlag) {
+  playToggle = theFlag;
+  time = millis(); //To start from the initial column
+}
+
+
+public void setupClearButton() {
+  cp5.addButton("Clear")
+    .setPosition(width*.85f, 50)
+    .setSize(35, 35)
+    .setColorBackground(buttonStepColorOff)
+    .setColorForeground(secondaryColor)
+    .setColorActive(buttonStepColorOn);
+}
+public void Clear() {
+  for (int i = 0; i < sBList.size(); i++) {
+    sBList.get(i).isClicked = false;
+  }
+}
+/* Xavier Santamaria */
+
 public void saveButtonsToFile() {
   String listButtonsClicked = "";
   for(StepButton sb : sBList) {
@@ -407,10 +411,10 @@ public void saveButtonsToFile() {
      listButtonsClicked += " " + sb.id;
    }
   }
-  println("ASDF");
   
   String[] splitedList = split(listButtonsClicked, ' ');
   saveStrings("/savedButtons/SavedButtons2.txt", splitedList);
+  println("Configuration buttons saved in './savedButtons/SavedButtons2.txt'");
 }
 
 public void activateButtonsFromFile(int n) {
@@ -421,19 +425,21 @@ public void activateButtonsFromFile(int n) {
   }
 }
 
-public void DDButtonsFile(int n) {
+public void DDButtonsFile(int n) { // Drop Down Buttons
   activateButtonsFromFile(n);
 }
+/* Xavier Santamaria */
+
 int size = 45;
 ArrayList<StepButton> sBList = new ArrayList<StepButton>();
 
 public void setupStepButtons() {
-  int counter = 0;
+  int id = 0;
   for (int i = 0; i < 16; i++) {
     for (int j = 0; j < 7; j++) {
-      StepButton sB = new StepButton(i, j, counter);
+      StepButton sB = new StepButton(i, j, id);
       sBList.add(sB);
-      counter++;
+      id++;
     }
   }
 }
@@ -547,25 +553,13 @@ class StepButton {
     }
   }
 } 
-//color tableColor          = color(252, 249, 234);
-//color buttonStepColorOff  = color(186, 223, 219);
-//color buttonStepColorOn   = color(248, 169, 120);
-//color secondaryColor      = color(255, 197, 161);
-
+/* Xavier Santamaria */
 int tableColor          = color(162, 213, 242);
 int buttonStepColorOff  = color(7, 104, 159);
 int buttonStepColorOn   = color(255, 126, 103);
 int secondaryColor      = color(240, 110, 90);
+/* Xavier Santamaria */
 
-//color tableColor          = color(122, 122, 122);
-//color buttonStepColorOff  = color(40, 40, 40);
-//color buttonStepColorOn   = color(220, 24, 14);
-//color secondaryColor      = color(#71C5EA);#7196B1
-// //green
-//color tableColor          = color(0, 68, 69);
-//color buttonStepColorOff  = color(44, 120, 115);
-//color buttonStepColorOn   = color(255, 216, 0);
-//color secondaryColor      = color(111, 185, 143);
 int hoverButton;
 
 public void draw() {
@@ -579,11 +573,11 @@ public void draw() {
   drawMeshStepButtons();
   drawSynth();
   
-  checkRecording();
+  drawRecording();
   
   drawHoveredButton();
   
-  showPlaylistName();
+  drawPlaylistName();
 }
 
 
@@ -621,7 +615,7 @@ public void drawMetronome() {
   rect(xMetronome, y +5, size, size -10, 80, 80, 5,5);
 }
 
-public void checkRecording() {
+public void drawRecording() {
   if(microhponeWorks) {
     if(recorder.isRecording()){
       recorderTimer++;
@@ -641,7 +635,7 @@ public void drawHoveredButton() {
   if(hoverButton != -1) sBList.get(hoverButton).drawSquare(); 
 }
 
-public void showPlaylistName() {
+public void drawPlaylistName() {
   textAlign(CENTER);
   textSize(18);
   text("Playing " + playlistName[iPlaylist] + " playlist", width/2, 25);

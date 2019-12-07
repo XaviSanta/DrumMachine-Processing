@@ -1,13 +1,15 @@
+/* Xavier Santamaria */
+
 int size = 45;
 ArrayList<StepButton> sBList = new ArrayList<StepButton>();
 
 void setupStepButtons() {
-  int counter = 0;
+  int id = 0;
   for (int i = 0; i < 16; i++) {
     for (int j = 0; j < 7; j++) {
-      StepButton sB = new StepButton(i, j, counter);
+      StepButton sB = new StepButton(i, j, id);
       sBList.add(sB);
-      counter++;
+      id++;
     }
   }
 }

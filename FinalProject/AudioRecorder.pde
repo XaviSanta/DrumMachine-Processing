@@ -1,3 +1,5 @@
+/* Xavier Santamaria */
+
 AudioRecorder recorder;
 AudioRecorder recorderOut;
 int counterSongs = 0;
@@ -18,14 +20,15 @@ void setupMicrphone() {
 void setupRecorderIn(int n) {
   recorder = minim.createRecorder(in, "/data/Custom"+n+".wav");
 }
+
 void setupRecorderOut() {
-  counterSongs++;
   recorderOut = minim.createRecorder(out, "/recordedSongs/song" + counterSongs +".wav");
 }
 
 void RecordOutput() {
   if ( recorderOut.isRecording() ) saveRecordOut();
   else {
+    setupRecorderOut();
     recorderOut.beginRecord();
     println("Recording...");
   }
@@ -49,7 +52,8 @@ void saveRecord() {
 void saveRecordOut() {
   recorderOut.save();
   recorderOut.endRecord();
-  println("Done saveing.");
+  println("Done saving. New song available in './recordedSongs/song" + counterSongs + ".wav' \n");
+  counterSongs++;
 }
 
 void Record1() {

@@ -1,3 +1,5 @@
+/* Xavier Santamaria */
+
 int hoverButton;
 
 void draw() {
@@ -11,11 +13,11 @@ void draw() {
   drawMeshStepButtons();
   drawSynth();
   
-  checkRecording();
+  drawRecording();
   
   drawHoveredButton();
   
-  showPlaylistName();
+  drawPlaylistName();
 }
 
 
@@ -53,7 +55,7 @@ void drawMetronome() {
   rect(xMetronome, y +5, size, size -10, 80, 80, 5,5);
 }
 
-void checkRecording() {
+void drawRecording() {
   if(microhponeWorks) {
     if(recorder.isRecording()){
       recorderTimer++;
@@ -73,7 +75,7 @@ void drawHoveredButton() {
   if(hoverButton != -1) sBList.get(hoverButton).drawSquare(); 
 }
 
-void showPlaylistName() {
+void drawPlaylistName() {
   textAlign(CENTER);
   textSize(18);
   text("Playing " + playlistName[iPlaylist] + " playlist", width/2, 25);
