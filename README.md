@@ -11,7 +11,7 @@
 * Desactivate all the buttons
 * Play/Pause the music
 * Record song - 2 click, 1 for activate and 1 for stop the recording
-* Also, when the new sound is recording the out is muted to don't interfere in the recording of the sound
+* Also, when the new sound is recording the out is muted to not interfere in the recording of the sound
 
 # What I have learned:
 * Processing
