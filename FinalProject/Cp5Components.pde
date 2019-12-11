@@ -16,7 +16,7 @@ void setupRecorderButtons() {
 }
 
 void setupRecorderOutButton() {
-  cp5.addToggle("RecordOutput")
+  cp5.addToggle("RecordOutput") // ./AudioRecorder.pde
       .setPosition(width*.9, height*.4)
       .setSize(size + size/2, size)
       .setColorBackground(buttonStepColorOff)
@@ -35,7 +35,7 @@ void setupMasterVolumeSlider() {
     .setColorLabel(buttonStepColorOff)
     .setColorForeground(buttonStepColorOn);
 
-
+  // TODO
   for (int i = 0; i < 7; i++) {
     String volRow = "Volume" + Integer.toString(1+i);
     cp5.addSlider(volRow)
@@ -69,11 +69,11 @@ void setupDropDownPlaylist() {
   }
 }
 void Playlist(int n){
-    setPlaylist(n);
+    setPlaylist(n); // Sets the playlist that the user has chosen
 }
 
 void setupSaveFileButton() {
-  cp5.addButton("saveButtonsToFile")
+  cp5.addButton("saveButtonsToFile") // ./SaveFile.pde
       .setPosition(30, 200)
       .setSize(size*2, size)
       .setColorBackground(buttonStepColorOff)
@@ -81,7 +81,7 @@ void setupSaveFileButton() {
       .setColorActive(buttonStepColorOn);
 }
 
-void setupDropDownFileButtons() {
+void setupDropDownFileButtons() { // When use choose a configuration, the buttons are clicked automatically
   dropDownListFileButtons = cp5.addDropdownList("DDButtonsFile")
     .setPosition(30, 260)
     .setBackgroundColor(buttonStepColorOn)
@@ -96,6 +96,9 @@ void setupDropDownFileButtons() {
   dropDownListFileButtons.addItem("Demo2" , 1);
   dropDownListFileButtons.addItem("Custom" ,2);
   
+}
+void DDButtonsFile(int n) { // Drop Down Buttons
+  activateButtonsFromFile(n); // ./SaveFile.pde
 }
 
 void setupPlayPauseToggle() {
@@ -122,7 +125,7 @@ void setupClearButton() {
     .setColorForeground(secondaryColor)
     .setColorActive(buttonStepColorOn);
 }
-void Clear() {
+void Clear() { // Desactivate all the stepButtons
   for (int i = 0; i < sBList.size(); i++) {
     sBList.get(i).isClicked = false;
   }

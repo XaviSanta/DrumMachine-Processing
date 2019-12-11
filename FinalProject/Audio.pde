@@ -26,7 +26,7 @@ void setupAudio() {
   playlistName[2] = "Custom";
 }
 
-void setPlaylist(int n) {
+void setPlaylist(int n) { // Given n: (0:House, 1:Rock, 2:Custom) it loads the sounds of that playlist
   for(int i = 0; i < 7; i++) {
     sound[i] = new Sampler(playlistName[n] + str(i+1) + ".wav", 7, minim); // Load the sounds of the playlist 
     sound[i].patch(out);  // And then patch them all in the output

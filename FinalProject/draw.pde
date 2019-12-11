@@ -1,33 +1,33 @@
 /* Xavier Santamaria */
 
-int hoverButton;
+int hoverButton; // Saves the id of the button we are hovering, otherwise -1
 
 void draw() {
   background(0);
   strokeWeight(2);
   
-  drawTable();
-  
-  if (playToggle) drawMetronome();
-  
+  drawTable(); // Draw the background
+  if (playToggle) drawMetronome(); // If play button is activated draw the metronome
   drawMeshStepButtons();
-  drawSynth();
-  
-  drawRecording();
-  
-  drawHoveredButton();
-  
-  drawPlaylistName();
+  drawSynth(); // Code to draw the wave of the output sounds
+  drawRecording(); // Draw in screen 'Recording...' if we are recording
+  drawHoveredButton(); // Emphasize the button the mouse in 
+  drawPlaylistName(); // Draw at the top of the screen which playlist are we using 
 }
 
 
-
+/*
+  Draw the rectangle that represents the "drum machine table"
+*/
 void drawTable() {
   stroke(0);
   fill(tableColor);
   rect(0, 0, width, height, 35, 35, 35, 35);
 }
 
+/*
+  Draw the squares (StepButtons)
+*/ 
 void drawMeshStepButtons() {
   stroke(0);
   for(int i = 0; i < sBList.size(); i++){
@@ -49,29 +49,35 @@ void drawSynth() {
   translate(0,-100);
 }
 
+/*
+  Get the position of the metronome and draw the rectangle in the position we got
+*/
 void drawMetronome() {
   xMetronome = calculateMetronomeXPosition();
   fill(buttonStepColorOn);
-  rect(xMetronome, y +5, size, size -10, 80, 80, 5,5);
+  rect(xMetronome, y +5, size, size -10, 80, 80, 5,5); 
 }
 
 void drawRecording() {
   if(microhponeWorks) {
-    if(recorder.isRecording()){
+    
+    // If we are recording a sound(trigger) it prints recording... during 2 seconds and then save the recorded sound
+    if(recorder.isRecording()){ 
       recorderTimer++;
       text("Recording...", 30, height*.5 - 20);
-      if(recorderTimer > 30){
+      if(recorderTimer > 30){ // When time gets to its limited save the Sample sound
         saveRecord();
       }
     }
   }
   
- if(recorderOut.isRecording()) {
+  // if we are recording the Song, print in screen 'Recording...'
+  if(recorderOut.isRecording()) {
     text("Recording...", width*.9, height*.4 - 20);
- }
+  }
 }
 
-void drawHoveredButton() { 
+void drawHoveredButton() { // If there is a button to hover, draw it
   if(hoverButton != -1) sBList.get(hoverButton).drawSquare(); 
 }
 

@@ -1,19 +1,25 @@
 /* Xavier Santamaria */
 
 int size = 45;
-ArrayList<StepButton> sBList = new ArrayList<StepButton>();
+ArrayList<StepButton> sBList = new ArrayList<StepButton>(); // List of stepButtons
 
-void setupStepButtons() {
+/*
+  Creates all the buttons needed which is a double for, 16 columns and 7 rows
+*/
+void setupStepButtons() { 
   int id = 0;
   for (int i = 0; i < 16; i++) {
     for (int j = 0; j < 7; j++) {
       StepButton sB = new StepButton(i, j, id);
-      sBList.add(sB);
+      sBList.add(sB); // List of StepButtons
       id++;
     }
   }
 }
 
+/*
+  check if coordenates are in the range of the StepButtons
+*/
 boolean isInStepButtonRange(int x, int y) {
   if (x < 152 || x > 152 + 16 * size || 
     y < 382 || y > 382 + 7 *  size) {
@@ -23,36 +29,45 @@ boolean isInStepButtonRange(int x, int y) {
   }
 }
 
+/*
+  get the StepButton given some coordenates 
+*/
 StepButton getStepButton(int x, int y) {
   int id = getButtonIdFromCoordenates(x, y);
   return sBList.get(id);
 }
 
+/*
+  get the ID of the button given some coordenates
+*/
 int getButtonIdFromCoordenates(int x, int y) {
-  int xInitial = 154;
-  int yInitial = 385;
+  int xInitial = 154; // x Where the first stepbutton is
+  int yInitial = 385; // y Where the first stepbutton is
 
   int col = (x-xInitial)/size;
   int row = (y-yInitial)/size;
-  return col * 7 + row;
+  int id  = col*7 + row;
+  return id;
 }
 
+// CLAS STEP BUTTON -----------------------------------------------
 class StepButton { 
   int col, row, id; 
   boolean isClicked;
   
-  
+  // Constructor
   StepButton (int col, int row, int id) {  
     this.col = col;
     this.row = row;
     this.id = id;
     isClicked = false;
-  } 
-
-  int getId() {
-    return id;
   }
 
+  /*
+    Activate the button. 
+    If it was activated already ->set is clicked to false 
+    Else -> set isClicked to true and playTheSound of the row 
+  */ 
   void activate() {
     if (isClicked) {
       isClicked = false;
@@ -62,32 +77,35 @@ class StepButton {
     }
   }
 
+  /*
+    Trigger the sound of that row
+  */
   void playSound() {
     sound[row].trigger();
   }
-
+  
+  /*
+    We use translate for better clear code in the rect()
+  */
   void drawSquare() {
-    setButtonColor();
+    setButtonColor(); // It changes the color if the mouse is in tha location of the button (Hover)
 
     translate(width*.15 + col*size, height*.5 + row*size);
     
     rect(0, 0, size, size, 15, 15, 15, 15);
-    drawNumber();
+    drawNumber(); // Draw the numbers that appear in the UI
     
     translate(-width*.15 -col*size, -height*.5 -row*size);
     
     stroke(255);
     strokeWeight(2);
   }
-
-  void hover() {
-    stroke(255,234,21);
-    drawSquare();
-    
-  }
   
+  /*
+    set different color of a button depending if the mouse is on top of the button or if it is clicked or not
+  */
   void setButtonColor() {
-    if(hoverButton == id) {
+    if(hoverButton == id) { // If hover button has the same id as the button id, use a secondary color and bigger stroke
       stroke(secondaryColor);
       strokeWeight(4);
     }
@@ -101,18 +119,22 @@ class StepButton {
       fill(buttonStepColorOff);
     }
   }
-
+  
+  /*
+    Draw the numbers that appear in the UI
+  */
   void drawNumber() {
-    if (row == 0 && (col % 4) == 0) {
+    if (row == 0 && (col % 4) == 0) { // Draw the 1, 2, 3, 4 numbers if we are in the first row and col%4
       translate(size/2 - 3, -size*0.1);
       fill(buttonStepColorOff);
       textSize(15);
       
-      text(4*col/16+1, 0, 0); //To write 1, 2, 3, 4
+      int number = 4*col/16+1; //number will be either 1, 2, 3 or 4 depending on the column the button is
+      text(number, 0, 0); 
       
       translate(-size/2 + 3, size*0.1);
     }
-    if (row == 6) {
+    if (row == 6) { // If we are in the last row, draw the 1 to 16 numbers that represent each column
       translate(size/2 - 5, size*1.5);
       fill(buttonStepColorOff);
       textSize(15);
