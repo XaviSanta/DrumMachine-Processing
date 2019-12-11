@@ -26,6 +26,15 @@ void drawTable() {
 }
 
 /*
+  Get the position of the metronome and draw the rectangle in the position we got
+*/
+void drawMetronome() {
+  xMetronome = calculateMetronomeXPosition();
+  fill(buttonStepColorOn);
+  rect(xMetronome, y +5, size, size -10, 80, 80, 5,5); 
+}
+
+/*
   Draw the squares (StepButtons)
 */ 
 void drawMeshStepButtons() {
@@ -47,15 +56,6 @@ void drawSynth() {
     //line( x1, 150 - out.right.get(i)*50, x2, 150 - out.right.get(i+1)*50);
   }  
   translate(0,-100);
-}
-
-/*
-  Get the position of the metronome and draw the rectangle in the position we got
-*/
-void drawMetronome() {
-  xMetronome = calculateMetronomeXPosition();
-  fill(buttonStepColorOn);
-  rect(xMetronome, y +5, size, size -10, 80, 80, 5,5); 
 }
 
 void drawRecording() {

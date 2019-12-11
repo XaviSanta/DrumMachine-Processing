@@ -3,7 +3,6 @@ import controlP5.*;
 import java.util.*; 
 
 ControlP5 cp5;
-String fileName;
 
 /*
   In this function we set the size of the program, instantiate CP5, 

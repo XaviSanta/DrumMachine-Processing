@@ -72,7 +72,7 @@ void saveRecord() {
   recorder.endRecord();
   out.unmute();
   println("Done saveing.");
-  setPlaylist(2);
+  setPlaylist(2); // 2 = Custom playlist
 }
 
 /*

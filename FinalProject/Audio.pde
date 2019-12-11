@@ -3,8 +3,7 @@
 import ddf.minim.*;
 import ddf.minim.ugens.*;
 
-Minim      minim;
-//FilePlayer filePlayer;
+Minim minim;
 Sampler [] sound = new Sampler[7];
 String [] playlistName = new String[3];
 AudioOutput out;
@@ -35,11 +34,6 @@ void setPlaylist(int n) { // Given n: (0:House, 1:Rock, 2:Custom) it loads the s
   iPlaylist = n; // Save in a variable the playlist we are using so we can print later in a text
 }
 
-int calculateMetronomeColumn(){
-  iMetronome = ((millis()-time)/120) % 16;
-  return iMetronome;
-}
-
 int calculateMetronomeXPosition() {
   calculateMetronomeColumn();//Number between 0 and 15, it changes in every beat
   
@@ -51,6 +45,14 @@ int calculateMetronomeXPosition() {
   return initX + (iMetronome) * 45; 
 }
 
+int calculateMetronomeColumn(){
+  iMetronome = ((millis()-time)/120) % 16;
+  return iMetronome;
+}
+
+/*
+  Play all the sounds in the corresponding column
+*/
 void playNotes() {
   for(int row = 0; row < 7; row++) {
     StepButton sb = sBList.get(row + iMetronome*7); // Get the column buttons
